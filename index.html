@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dehati - The Taste Of Dehaat</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f7f0df;color:#3b2415}
+header{background:#173b16;color:#fff;padding:22px 15px;text-align:center}
+header h1{font-size:52px;margin:0;font-family:Georgia,serif}
+header p{margin:5px;font-size:18px}
+.badge{display:inline-block;background:#e9bd32;color:#241600;padding:7px 15px;border-radius:20px;font-weight:bold;margin-top:8px}
+.container{max-width:900px;margin:auto;padding:15px}
+h2{background:#173b16;color:white;padding:10px 15px;border-radius:8px}
+.card{background:#fffaf0;border:1px solid #d6c59e;border-radius:12px;padding:15px;margin:12px 0;box-shadow:0 2px 7px #0001}
+.card h3{margin:0 0 5px;font-size:20px}
+.desc{font-size:14px;color:#66584b;margin-bottom:10px}
+.option{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed #cbb991;padding:10px 0}
+.price{font-weight:bold;color:#a32619;font-size:18px}
+button{border:0;border-radius:8px;padding:9px 14px;font-weight:bold;cursor:pointer}
+.add{background:#173b16;color:white}
+.cart{position:sticky;bottom:0;background:#fff;border-top:2px solid #173b16;padding:12px;box-shadow:0 -3px 12px #0002;z-index:5}
+.cart button{background:#b8860b;color:#fff;width:100%;font-size:17px}
+#cartItems div{padding:5px 0;border-bottom:1px solid #eee}
+.form{background:white;padding:18px;border-radius:12px;margin-top:20px}
+input,textarea,select{width:100%;padding:12px;margin:7px 0 12px;border:1px solid #bbb;border-radius:8px;font-size:15px}
+.total{font-size:22px;font-weight:bold;text-align:right;margin:12px 0}
+.pay{background:#16883b;color:white;width:100%;font-size:17px}
+.note{font-size:13px;color:#666}
+footer{background:#173b16;color:white;text-align:center;padding:25px;margin-top:30px}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Dehati</h1>
+<p><b>The Taste Of Dehaat</b></p>
+<p>घर का गाँव का खाना</p>
+<div class="badge">Best Combo Meals @ ₹99</div>
+</header>
+
+<div class="container">
+
+<h2>REGULAR COMBOS</h2>
+<div id="regular"></div>
+
+<h2>PREMIUM GHEE COMBOS</h2>
+<div id="premium"></div>
+
+<div class="form">
+<h2 style="margin-top:0">🛒 Your Order</h2>
+<div id="cartItems">Cart is empty.</div>
+<div class="total">Total: ₹<span id="total">0</span></div>
+
+<label><b>Name *</b></label>
+<input id="name" placeholder="Your name">
+
+<label><b>Mobile Number *</b></label>
+<input id="phone" type="tel" maxlength="10" placeholder="10 digit mobile number">
+
+<label><b>Order Type</b></label>
+<select id="type" onchange="toggleAddress()">
+<option value="delivery">Home Delivery</option>
+<option value="pickup">Self Pickup</option>
+</select>
+
+<div id="addressBox">
+<label><b>Delivery Address *</b></label>
+<textarea id="address" rows="3" placeholder="House no., street, area, landmark"></textarea>
+</div>
+
+<label><b>Payment</b></label>
+<select id="payment">
+<option value="UPI">UPI Payment</option>
+<option value="COD">Cash on Delivery / Pickup</option>
+</select>
+
+<div id="upiBox">
+<p><b>UPI ID:</b> 8100418737@ybl</p>
+<p class="note">Payment karne ke baad UTR/Transaction ID neeche daal sakte ho.</p>
+<input id="utr" placeholder="UPI Transaction / UTR ID (optional)">
+</div>
+
+<button class="pay" onclick="placeOrder()">📲 PLACE ORDER ON WHATSAPP</button>
+</div>
+
+</div>
+
+<footer>
+<b>Dehati - The Taste Of Dehaat</b><br>
+Ghar Ka Gaon Ka Khana<br><br>
+📞 8100418737<br>
+💳 UPI: 8100418737@ybl
+</footer>
+
+<div class="cart">
+<button onclick="document.querySelector('.form').scrollIntoView({behavior:'smooth'})">
+🛒 View Cart — ₹<span id="bottomTotal">0</span>
+</button>
+</div>
+
+<script>
+
+const menu = [
+["Litti Chokha Combo","Fried Litti + Aalu Baigan Tomato Chokha + Coriander Green Chutney",
+[["3 Pc.",99],["5 Pc.",189]],"regular"],
+
+["Sattu Bharva Puri Combo","Sattu Puri + Aalu Baigan Tomato Chokha + Coriander Green Chutney",
+[["3 Puri",99],["5 Puri",189]],"regular"],
+
+["Sattu Paratha Combo","Sattu Paratha + Aalu Baigan Tomato Chokha + Coriander Green Chutney",
+[["2 Paratha",99],["3 Paratha",149],["4 Paratha",189]],"regular"],
+
+["Aalu Paratha Combo","Aalu Paratha + Tomato Sauce + Green Chutney",
+[["2 Paratha",99],["3 Paratha",149],["4 Paratha",189]],"regular"],
+
+["Roti Sabji Combo","Ghee ki Roti + Aalu ka Bhujiya Sabji + Salaad + Pickle",
+[["4 Roti",99],["5 Roti",129],["6 Roti",149]],"regular"],
+
+["Triangle Paratha Combo","Triangle Paratha + Aalu Bhujiya Sabji + Salaad + Pickle",
+[["4 Pc.",129],["5 Pc.",179],["6 Pc.",199]],"regular"],
+
+["Ghee Litti Combo","Rosted Ghee Garnish Litti + Aalu Baigan Tomato Chokha + Coriander Green Chutney",
+[["3 Pc.",149],["4 Pc.",199],["5 Pc.",249]],"premium"],
+
+["Ghee Sattu Paratha Combo","Ghee Sattu Paratha + Aalu Baigan Tomato Chokha + Coriander Green Chutney",
+[["2 Paratha",149],["3 Paratha",199]],"premium"],
+
+["Ghee Aalu Paratha Combo","Ghee Aalu Paratha + Tomato Sauce + Green Chutney",
+[["2 Paratha",149],["3 Paratha",199]],"premium"],
+
+["Premium Ghee Aalu Paratha Combo","Ghee Aalu Paratha + Homemade Dahi + Peanut Chutney",
+[["2 Paratha",299],["3 Paratha",399]],"premium"]
+];
+
+let cart=[];
+
+function showMenu(){
+
+let regular="";
+let premium="";
+
+menu.forEach((item,i)=>{
+
+let html=`
+<div class="card">
+<h3>${i+1}. ${item[0]}</h3>
+<div class="desc">${item[1]}</div>`;
+
+item[2].forEach((op,j)=>{
+html+=`
+<div class="option">
+<div><b>${op[0]}</b><br><span class="price">₹${op[1]}</span></div>
+<button class="add" onclick="addItem(${i},${j})">ADD</button>
+</div>`;
+});
+
+html+=`</div>`;
+
+if(item[3]=="regular") regular+=html;
+else premium+=html;
+
+});
+
+document.getElementById("regular").innerHTML=regular;
+document.getElementById("premium").innerHTML=premium;
+}
+
+function addItem(i,j){
+let item=menu[i];
+let option=item[2][j];
+
+let existing=cart.find(x=>x.i===i && x.j===j);
+
+if(existing) existing.qty++;
+else cart.push({i:i,j:j,qty:1});
+
+updateCart();
+}
+
+function removeItem(index){
+cart[index].qty--;
+
+if(cart[index].qty<=0) cart.splice(index,1);
+
+updateCart();
+}
+
+function updateCart(){
+
+let html="";
+
+if(cart.length===0){
+html="Cart is empty.";
+}
+
+let total=0;
+
+cart.forEach((x,index)=>{
+
+let item=menu[x.i];
+let op=item[2][x.j];
+let amount=op[1]*x.qty;
+
+total+=amount;
+
+html+=`
+<div>
+<b>${item[0]}</b><br>
+${op[0]} × ${x.qty}
+<span style="float:right">₹${amount}</span>
+<br>
+<button onclick="removeItem(${index})" style="padding:4px 9px;background:#ddd">−</button>
+<button onclick="addItem(${x.i},${x.j})" style="padding:4px 9px;background:#ddd">+</button>
+</div>`;
+});
+
+document.getElementById("cartItems").innerHTML=html;
+document.getElementById("total").innerText=total;
+document.getElementById("bottomTotal").innerText=total;
+}
+
+function toggleAddress(){
+let type=document.getElementById("type").value;
+document.getElementById("addressBox").style.display=
+type==="delivery"?"block":"none";
+}
+
+function placeOrder(){
+
+if(cart.length===0){
+alert("Pehle menu se item ADD karo.");
+return;
+}
+
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let type=document.getElementById("type").value;
+let address=document.getElementById("address").value.trim();
+let payment=document.getElementById("payment").value;
+let utr=document.getElementById("utr").value.trim();
+
+if(!name){
+alert("Apna naam daalo.");
+return;
+}
+
+if(!/^[0-9]{10}$/.test(phone)){
+alert("10 digit mobile number daalo.");
+return;
+}
+
+if(type==="delivery" && !address){
+alert("Delivery address daalo.");
+return;
+}
+
+let total=cart.reduce((sum,x)=>{
+return sum+menu[x.i][2][x.j][1]*x.qty;
+},0);
+
+let orderNo="DH"+Date.now().toString().slice(-6);
+
+let message=
+`*DEHATI - NEW ORDER*%0A`+
+`Order ID: ${orderNo}%0A%0A`+
+`*Customer:* ${encodeURIComponent(name)}%0A`+
+`*Mobile:* ${phone}%0A`+
+`*Order Type:* ${type==="delivery"?"Home Delivery":"Self Pickup"}%0A`+
+(type==="delivery"?`*Address:* ${encodeURIComponent(address)}%0A`:"")+
+`%0A*ITEMS:*%0A`;
+
+cart.forEach(x=>{
+let item=menu[x.i];
+let op=item[2][x.j];
+message+=`${encodeURIComponent(item[0])} - ${encodeURIComponent(op[0])} × ${x.qty} = ₹${op[1]*x.qty}%0A`;
+});
+
+message+=
+`%0A*TOTAL: ₹${total}*%0A`+
+`Payment: ${payment}%0A`+
+(payment==="UPI"?`UTR: ${utr||"Not provided"}%0A`:"")+
+`%0AUPI: 8100418737@ybl`;
+
+let whatsapp="https://wa.me/918100418737?text="+message;
+
+if(payment==="UPI"){
+
+let upiLink=
+"upi://pay?pa=8100418737@ybl&pn=Dehati&am="+total+"&cu=INR";
+
+window.location.href=upiLink;
+
+setTimeout(()=>{
+window.open(whatsapp,"_blank");
+},1800);
+
+}else{
+
+window.open(whatsapp,"_blank");
+
+}
+
+}
+
+showMenu();
+updateCart();
+
+</script>
+
+</body>
+</html>
