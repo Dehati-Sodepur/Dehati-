@@ -1,894 +1,589 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dehati - The Taste Of Dehaat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dehati – The Taste Of Dehaat</title>
+    <style>
+        :root {
+            --primary-color: #5c1d06; /* Desi Deep Brown/Clay */
+            --accent-color: #d97706;  /* Mustard Gold */
+            --bg-color: #fdfbf7;      /* Warm Parchment */
+            --card-bg: #ffffff;
+            --text-color: #2b1810;
+        }
 
-<style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:Georgia,"Times New Roman",serif;
-background:#f4ead2;
-color:#392316;
-}
-header{
-background:linear-gradient(135deg,#173b16,#315d24);
-color:#fff;
-text-align:center;
-padding:18px 12px 22px;
-border-bottom:6px solid #c69732;
-}
-.logo{
-width:110px;
-height:110px;
-object-fit:contain;
-border-radius:50%;
-background:#fff;
-padding:5px;
-display:block;
-margin:0 auto 8px;
-}
-.brand{
-font-size:42px;
-font-weight:bold;
-margin:0;
-}
-.tagline{
-font-size:18px;
-margin:4px 0;
-}
-.sub{
-font-size:14px;
-opacity:.9;
-}
-.badge{
-display:inline-block;
-background:#d8a928;
-color:#2b1a05;
-padding:7px 15px;
-border-radius:20px;
-font-weight:bold;
-margin-top:10px;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:14px;
-}
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            border-bottom: 5px solid var(--accent-color);
+        }
 
-.section-title{
-background:#173b16;
-color:white;
-padding:12px 15px;
-border-radius:9px;
-margin-top:22px;
-font-size:21px;
-}
+        header img {
+            max-width: 180px;
+            height: auto;
+            border-radius: 8px;
+        }
 
-.card{
-background:#fffaf0;
-border:1px solid #d5c197;
-border-radius:14px;
-overflow:hidden;
-margin:13px 0;
-box-shadow:0 3px 12px #0002;
-}
+        header h1 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+            color: #fef3c7;
+        }
 
-.food-img{
-width:100%;
-height:210px;
-object-fit:cover;
-display:block;
-background:#ddd;
-}
+        header p {
+            margin: 0;
+            font-size: 14px;
+            font-style: italic;
+            color: #fde68a;
+        }
 
-.card-body{padding:14px}
-.card h3{
-margin:0 0 5px;
-font-size:21px;
-}
-.desc{
-font-size:14px;
-color:#6b5a49;
-line-height:1.4;
-margin-bottom:8px;
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
 
-.option{
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-top:1px dashed #cbb98d;
-padding:11px 0;
-}
-.price{
-font-weight:bold;
-font-size:18px;
-color:#a42c18;
-}
-.add{
-background:#173b16;
-color:white;
-border:0;
-padding:9px 15px;
-border-radius:8px;
-font-weight:bold;
-}
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 2px dashed var(--accent-color);
+            padding-bottom: 5px;
+            margin: 25px 0 15px;
+        }
 
-.form{
-background:#fff;
-border-radius:14px;
-padding:18px;
-margin-top:22px;
-box-shadow:0 3px 12px #0002;
-}
-.form h2{
-margin-top:0;
-color:#173b16;
-}
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-label{
-font-weight:bold;
-display:block;
-margin-top:10px;
-}
-input,textarea,select{
-width:100%;
-padding:12px;
-border:1px solid #c8bda7;
-border-radius:8px;
-margin-top:6px;
-font-size:15px;
-background:#fffdf8;
-}
+        .menu-card {
+            background-color: var(--card-bg);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
 
-.location-btn{
-width:100%;
-background:#76552b;
-color:white;
-border:0;
-padding:12px;
-border-radius:8px;
-font-weight:bold;
-margin-top:8px;
-}
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-.callbox{
-padding:12px;
-background:#f5edda;
-border-radius:8px;
-margin-top:10px;
-}
+        .menu-card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
 
-.cart-box{
-background:#f8f1df;
-padding:12px;
-border-radius:9px;
-}
-.cart-item{
-padding:8px 0;
-border-bottom:1px solid #ddd;
-}
-.qtybtn{
-padding:3px 9px;
-border:0;
-border-radius:5px;
-margin-top:5px;
-}
-.total{
-font-size:22px;
-font-weight:bold;
-text-align:right;
-margin:14px 0;
-}
+        .menu-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
 
-.place{
-width:100%;
-padding:14px;
-background:#16843b;
-color:white;
-border:0;
-border-radius:9px;
-font-size:17px;
-font-weight:bold;
-}
-.upi{
-background:#eef7ed;
-border:1px solid #b9d7b5;
-padding:12px;
-border-radius:8px;
-margin-top:10px;
-}
-.delivery-info{
-background:#fff7dc;
-border:1px solid #e0c66d;
-padding:12px;
-border-radius:9px;
-margin-top:12px;
-font-size:14px;
-line-height:1.5;
-}
+        .menu-card p {
+            margin: 0 0 12px;
+            font-size: 13px;
+            color: #6b7280;
+            flex-grow: 1;
+        }
 
-.sticky{
-position:sticky;
-bottom:0;
-z-index:10;
-background:#fff;
-padding:10px;
-box-shadow:0 -3px 12px #0003;
-}
-.sticky button{
-width:100%;
-background:#b8860b;
-color:white;
-border:0;
-border-radius:9px;
-padding:13px;
-font-size:17px;
-font-weight:bold;
-}
+        .price-select {
+            margin-bottom: 12px;
+        }
 
-footer{
-background:#173b16;
-color:white;
-text-align:center;
-padding:25px 15px;
-margin-top:30px;
-}
-.small{
-font-size:13px;
-color:#6b6256;
-}
-.hidden{display:none}
-</style>
+        .price-select select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Cart & Checkout Section */
+        .checkout-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .btn-gps {
+            background-color: #059669;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .order-summary {
+            background-color: #fef3c7;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .order-summary div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-
-<img class="logo"
-src="https://kommodo.ai/i/Rg2qdO5K3qwCKJi3EvLf"
-alt="Dehati Logo">
-
-<h1 class="brand">Dehati</h1>
-
-<div class="tagline">The Taste Of Dehaat</div>
-<div class="sub">घर का गाँव का खाना • Authentic Bihari Food</div>
-
-<div class="badge">Desi • Homemade • Premium</div>
-
-</header>
-
-<div class="container">
-
-<div class="delivery-info">
-<b>🚚 Home Delivery</b><br>
-0–3 km: ₹30 &nbsp; | &nbsp; 3–5 km: ₹50<br>
-5–7 km: ₹15/km &nbsp; | &nbsp; 7 km से ज्यादा: Delivery unavailable<br><br>
-<b>FREE DELIVERY:</b><br>
-1 km तक ₹500+ • 3 km तक ₹1,000+ • 5 km तक ₹1,200+
-</div>
-
-<h2 class="section-title">🌾 Dehati Regular Combos</h2>
-
-<div id="regular"></div>
-
-<h2 class="section-title">🪔 Premium Ghee Specials</h2>
-
-<div id="premium"></div>
-
-<div class="form">
-
-<h2>🛒 Your Order</h2>
-
-<div id="cartItems" class="cart-box">
-Cart is empty.
-</div>
-
-<div class="total">
-Food: ₹<span id="foodTotal">0</span><br>
-Delivery: ₹<span id="deliveryTotal">0</span><br>
-Grand Total: ₹<span id="grandTotal">0</span>
-</div>
-
-<label>Your Name *</label>
-<input id="name" placeholder="Enter your name">
-
-<label>Mobile Number *</label>
-<input id="phone" type="tel" maxlength="10"
-placeholder="10 digit mobile number">
-
-<label>Order Type *</label>
-<select id="orderType" onchange="orderTypeChanged()">
-<option value="delivery">Home Delivery</option>
-<option value="pickup">Self Pickup</option>
-</select>
-
-<div id="locationArea">
-
-<label>📍 Delivery Location *</label>
-
-<button class="location-btn" onclick="getLocation()">
-📍 Use My Current Location
-</button>
-
-<p id="locationStatus" class="small">
-Location अभी select नहीं हुई है.
-</p>
-
-<button class="location-btn"
-onclick="shareWhatsAppLocation()">
-📲 Send Live Location on WhatsApp
-</button>
-
-<label>Landmark *</label>
-<input id="landmark"
-placeholder="Nearby landmark / building / shop">
-
-<label>Full Address *</label>
-<textarea id="address" rows="3"
-placeholder="House no., street, area"></textarea>
-
-<div class="callbox">
-<label style="display:inline">
-<input id="callConfirm" type="checkbox" style="width:auto">
- 📞 Please call me for order confirmation
-</label>
-</div>
-
-</div>
-
-<label>Payment Method *</label>
-
-<select id="payment" onchange="paymentChanged()">
-<option value="UPI">UPI Payment</option>
-<option value="COD">Cash on Delivery</option>
-</select>
-
-<div class="upi">
-<b>UPI ID:</b> 8100418737@ybl<br>
-<span class="small">
-₹500 से ऊपर के orders में केवल UPI available है.
-</span>
-
-<input id="utr"
-placeholder="UPI Transaction ID / UTR (optional)">
-</div>
-
-<button class="place" onclick="placeOrder()">
-📲 PLACE ORDER ON WHATSAPP
-</button>
-
-</div>
-</div>
-
-<footer>
-<b>DEHATI</b><br>
-The Taste Of Dehaat<br>
-घर का गाँव का खाना<br><br>
-📞 8100418737<br>
-💳 8100418737@ybl
-</footer>
-
-<div class="sticky">
-<button onclick="document.querySelector('.form').scrollIntoView({behavior:'smooth'})">
-🛒 View Cart — ₹<span id="stickyTotal">0</span>
-</button>
-</div>
-
-<script>
-
-const KITCHEN_LAT = 22.699188;
-const KITCHEN_LNG = 88.374116;
-
-const menu = [
-
-{
-name:"Litti Chokha Combo",
-desc:"Desi litti with Aalu-Baigan-Tomato Chokha & Coriander Green Chutney",
-img:"https://chatgpt.com/s/m_6a7b2452ef588191a973992f2efc22cb",
-type:"regular",
-options:[["3 Pc.",99],["5 Pc.",189]]
-},
-
-{
-name:"Sattu Bharva Puri Combo",
-desc:"Sattu Bharva Puri with Desi Chokha & Green Chutney",
-img:"https://chatgpt.com/s/m_6a7b25581d74819199926aa50150f5cb",
-type:"regular",
-options:[["3 Puri",99],["5 Puri",189]]
-},
-
-{
-name:"Sattu Paratha Combo",
-desc:"Sattu Paratha with Chokha & Green Chutney",
-img:"https://chatgpt.com/s/m_6a7b248a677c81919c6c59d0f540ba73",
-type:"regular",
-options:[["2 Paratha",99],["3 Paratha",149],["4 Paratha",189]]
-},
-
-{
-name:"Aalu Paratha Combo",
-desc:"Aalu Paratha with Chutney",
-img:"https://chatgpt.com/s/m_6a7b26887a6c8191a1c57d191cc698ef",
-type:"regular",
-options:[["2 Paratha",99],["3 Paratha",149],["4 Paratha",189]]
-},
-
-{
-name:"Triangle Paratha Combo",
-desc:"Desi Triangle Paratha with Aalu Bhujiya, Salad & Pickle",
-img:"https://chatgpt.com/s/m_6a7b24bcc12c8191addb346d2c13f388",
-type:"regular",
-options:[["4 Pc.",129],["6 Pc.",179]]
-},
-
-{
-name:"Roti Sabji Combo",
-desc:"Ghee Roti + Aalu Bhujiya Sabji + Salad + Homemade Pickle",
-img:"https://chatgpt.com/s/m_6a7b24fd39408191bd6c7de0397eb44f",
-type:"regular",
-options:[["4 Roti",99],["5 Roti",129],["6 Roti",149]]
-},
-
-{
-name:"Ghee Litti Combo",
-desc:"Roasted Litti generously garnished with Desi Ghee + Chokha + Green Chutney",
-img:"https://chatgpt.com/s/m_6a7b23a865608191bc1c60a2b8381ad3",
-type:"premium",
-options:[["3 Pc.",149],["4 Pc.",199],["5 Pc.",249]]
-},
-
-{
-name:"Ghee Aalu Paratha Combo",
-desc:"Desi Ghee Aalu Paratha with Green Chutney",
-img:"https://chatgpt.com/s/m_6a7b26887a6c8191a1c57d191cc698ef",
-type:"premium",
-options:[["2 Paratha",149],["3 Paratha",199]]
-},
-
-{
-name:"Premium Ghee Aalu Paratha Combo",
-desc:"Premium Ghee Aalu Paratha with Homemade Dahi & Peanut Chutney",
-img:"https://chatgpt.com/s/m_6a7b262f33b88191b4d035e197264289",
-type:"premium",
-options:[["2 Paratha",299],["3 Paratha",399]]
-}
-
-];
-
-let cart=[];
-let customerLat=null;
-let customerLng=null;
-
-function renderMenu(){
-
-let regular="";
-let premium="";
-
-menu.forEach((item,i)=>{
-
-let html=`
-<div class="card">
-
-<img class="food-img"
-src="${item.img}"
-alt="${item.name}"
-onerror="this.style.display='none'">
-
-<div class="card-body">
-
-<h3>${item.name}</h3>
-
-<div class="desc">${item.desc}</div>
-`;
-
-item.options.forEach((op,j)=>{
-
-html+=`
-<div class="option">
-
-<div>
-<b>${op[0]}</b><br>
-<span class="price">₹${op[1]}</span>
-</div>
-
-<button class="add"
-onclick="addItem(${i},${j})">
-ADD
-</button>
-
-</div>
-`;
-
-});
-
-html+=`</div></div>`;
-
-if(item.type==="regular") regular+=html;
-else premium+=html;
-
-});
-
-document.getElementById("regular").innerHTML=regular;
-document.getElementById("premium").innerHTML=premium;
-}
-
-function addItem(i,j){
-
-let found=cart.find(x=>x.i===i && x.j===j);
-
-if(found) found.qty++;
-else cart.push({i,j,qty:1});
-
-updateCart();
-}
-
-function removeItem(index){
-
-cart[index].qty--;
-
-if(cart[index].qty<=0)
-cart.splice(index,1);
-
-updateCart();
-}
-
-function foodTotal(){
-
-return cart.reduce((sum,x)=>
-sum + menu[x.i].options[x.j][1]*x.qty,0);
-
-}
-
-function distanceKm(lat1,lon1,lat2,lon2){
-
-const R=6371;
-
-const dLat=(lat2-lat1)*Math.PI/180;
-const dLon=(lon2-lon1)*Math.PI/180;
-
-const a=
-Math.sin(dLat/2)**2+
-Math.cos(lat1*Math.PI/180)*
-Math.cos(lat2*Math.PI/180)*
-Math.sin(dLon/2)**2;
-
-return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-
-}
-
-function calculateDelivery(){
-
-if(document.getElementById("orderType").value==="pickup")
-return 0;
-
-if(customerLat===null)
-return null;
-
-let d=distanceKm(
-KITCHEN_LAT,
-KITCHEN_LNG,
-customerLat,
-customerLng
-);
-
-let food=foodTotal();
-
-if(d>7)
-return -1;
-
-if(d<=1 && food>=500)
-return 0;
-
-if(d<=3 && food>=1000)
-return 0;
-
-if(d<=5 && food>=1200)
-return 0;
-
-if(d<=3)
-return 30;
-
-if(d<=5)
-return 50;
-
-return Math.ceil(d)*15;
-
-}
-
-function updateCart(){
-
-let html="";
-
-if(cart.length===0)
-html="Cart is empty.";
-
-cart.forEach((x,index)=>{
-
-let item=menu[x.i];
-let op=item.options[x.j];
-let amount=op[1]*x.qty;
-
-html+=`
-<div class="cart-item">
-
-<b>${item.name}</b><br>
-
-${op[0]} × ${x.qty}
-<span style="float:right">₹${amount}</span>
-
-<br>
-
-<button class="qtybtn"
-onclick="removeItem(${index})">−</button>
-
-<button class="qtybtn"
-onclick="addItem(${x.i},${x.j})">+</button>
-
-</div>
-`;
-
-});
-
-document.getElementById("cartItems").innerHTML=html;
-
-let food=foodTotal();
-
-let delivery=calculateDelivery();
-
-if(delivery===null)
-delivery=0;
-
-if(delivery===-1)
-document.getElementById("deliveryTotal").innerText="N/A";
-else
-document.getElementById("deliveryTotal").innerText=delivery;
-
-document.getElementById("foodTotal").innerText=food;
-
-let grand=delivery>=0 ? food+delivery : food;
-
-document.getElementById("grandTotal").innerText=grand;
-
-document.getElementById("stickyTotal").innerText=grand;
-
-}
-
-function getLocation(){
-
-if(!navigator.geolocation){
-
-alert("Your browser does not support location.");
-
-return;
-}
-
-document.getElementById("locationStatus").innerText=
-"📍 Location detect ho rahi hai...";
-
-navigator.geolocation.getCurrentPosition(
-
-function(pos){
-
-customerLat=pos.coords.latitude;
-customerLng=pos.coords.longitude;
-
-let d=distanceKm(
-KITCHEN_LAT,
-KITCHEN_LNG,
-customerLat,
-customerLng
-);
-
-document.getElementById("locationStatus").innerText=
-"✅ Location selected • Approx. "+d.toFixed(1)+" km from Dehati";
-
-updateCart();
-
-},
-
-function(){
-
-alert("Location permission allow karo.");
-
-}
-
-);
-
-}
-
-function shareWhatsAppLocation(){
-
-let msg=
-"Hello Dehati, meri delivery location ye hai:%0A"+
-"https://maps.google.com/?q="+
-(customerLat!==null ? customerLat+","+customerLng : "");
-
-window.open(
-"https://wa.me/918100418737?text="+msg,
-"_blank"
-);
-
-}
-
-function orderTypeChanged(){
-
-let type=document.getElementById("orderType").value;
-
-document.getElementById("locationArea").style.display=
-type==="delivery"?"block":"none";
-
-updateCart();
-
-}
-
-function paymentChanged(){
-
-let payment=document.getElementById("payment").value;
-
-if(foodTotal()>500 && payment==="COD"){
-
-alert("₹500 se upar COD available nahi hai.");
-
-document.getElementById("payment").value="UPI";
-
-}
-
-}
-
-function placeOrder(){
-
-if(cart.length===0){
-
-alert("Pehle menu se item ADD karo.");
-
-return;
-}
-
-let name=document.getElementById("name").value.trim();
-let phone=document.getElementById("phone").value.trim();
-let type=document.getElementById("orderType").value;
-let address=document.getElementById("address").value.trim();
-let landmark=document.getElementById("landmark").value.trim();
-let payment=document.getElementById("payment").value;
-let utr=document.getElementById("utr").value.trim();
-let call=document.getElementById("callConfirm").checked;
-
-if(!name){
-
-alert("Naam daalo.");
-return;
-}
-
-if(!/^[0-9]{10}$/.test(phone)){
-
-alert("10 digit mobile number daalo.");
-return;
-}
-
-if(type==="delivery"){
-
-if(customerLat===null){
-
-alert("Pehle 'Use My Current Location' dabao.");
-return;
-}
-
-if(!landmark || !address){
-
-alert("Landmark aur full address dono daalo.");
-return;
-}
-
-}
-
-let food=foodTotal();
-let delivery=calculateDelivery();
-
-if(type==="delivery" && delivery===-1){
-
-alert("Sorry! Dehati delivery sirf 7 km ke andar available hai.");
-
-return;
-}
-
-if(delivery===null) delivery=0;
-
-if(food>500 && payment==="COD"){
-
-alert("₹500 se upar COD available nahi hai. UPI select karo.");
-
-return;
-}
-
-let grand=food+delivery;
-
-let orderId=
-"DH"+Date.now().toString().slice(-7);
-
-let msg=
-"*🌾 DEHATI - NEW ORDER*%0A"+
-"*The Taste Of Dehaat*%0A%0A"+
-
-"*Order ID:* "+orderId+"%0A"+
-"*Customer:* "+encodeURIComponent(name)+"%0A"+
-"*Mobile:* "+phone+"%0A"+
-"*Order:* "+(type==="delivery"?"Home Delivery":"Self Pickup")+"%0A%0A"+
-
-"*ITEMS:*%0A";
-
-cart.forEach(x=>{
-
-let item=menu[x.i];
-let op=item.options[x.j];
-
-msg+=
-encodeURIComponent(item.name)+
-" - "+encodeURIComponent(op[0])+
-" × "+x.qty+
-" = ₹"+(op[1]*x.qty)+
-"%0A";
-
-});
-
-msg+=
-"%0A*Food Total:* ₹"+food+
-"%0A*Delivery:* "+(delivery===0?"FREE":"₹"+delivery)+
-"%0A*GRAND TOTAL:* ₹"+grand+
-"%0A%0A"+
-"*Payment:* "+payment+
-"%0A"+
-(payment==="UPI"?"*UTR:* "+encodeURIComponent(utr||"Will provide")+"%0A":"")+
-
-(type==="delivery"?
-"*Address:* "+encodeURIComponent(address)+
-"%0A*Landmark:* "+encodeURIComponent(landmark)+
-"%0A*Location:* https://maps.google.com/?q="+
-customerLat+","+customerLng+"%0A":"")+
-
-"*Call confirmation:* "+(call?"YES":"NO");
-
-let whatsapp=
-"https://wa.me/918100418737?text="+msg;
-
-if(payment==="UPI"){
-
-let upi=
-"upi://pay?pa=8100418737@ybl"+
-"&pn=Dehati"+
-"&am="+grand+
-"&cu=INR";
-
-window.location.href=upi;
-
-setTimeout(function(){
-
-window.open(whatsapp,"_blank");
-
-},1800);
-
-}else{
-
-window.open(whatsapp,"_blank");
-
-}
-
-}
-
-document.getElementById("payment").addEventListener(
-"change",
-paymentChanged
-);
-
-renderMenu();
-updateCart();
-
-</script>
-
+    <header>
+        <!-- PASTE DEHATI LOGO DIRECT URL BELOW -->
+        <img src="PASTE_YOUR_DEHATI_LOGO_URL_HERE" alt="Dehati Logo">
+        <h1>Dehati</h1>
+        <p>“The Taste Of Dehaat” – Ghar Ka Gaon Ka Khana</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Our Authentic Combos</h2>
+
+        <div class="menu-grid">
+
+            <!-- 1. Litti Chokha Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_LITTI_CHOKHA_COMBO_URL_HERE" alt="Litti Chokha Combo">
+                <div class="menu-card-content">
+                    <h3>Litti Chokha Combo</h3>
+                    <p>Fried Litti + Aalu Baigan Tomato Chokha + Green Chutney</p>
+                    <div class="price-select">
+                        <select id="price-litti">
+                            <option value="99|3 Pc">3 Pc - ₹99</option>
+                            <option value="189|5 Pc">5 Pc - ₹189</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Litti Chokha Combo', 'price-litti')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 2. Sattu Bharva Puri Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_SATTU_BHARVA_PURI_URL_HERE" alt="Sattu Bharva Puri">
+                <div class="menu-card-content">
+                    <h3>Sattu Bharva Puri Combo</h3>
+                    <p>Sattu Puri + Aalu Baigan Tomato Chokha + Green Chutney</p>
+                    <div class="price-select">
+                        <select id="price-puri">
+                            <option value="99|3 Puri">3 Puri - ₹99</option>
+                            <option value="189|5 Puri">5 Puri - ₹189</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Sattu Bharva Puri Combo', 'price-puri')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 3. Sattu Paratha Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_SATTU_PARATHA_COMBO_URL_HERE" alt="Sattu Paratha Combo">
+                <div class="menu-card-content">
+                    <h3>Sattu Paratha Combo</h3>
+                    <p>Sattu Paratha + Aalu Baigan Tomato Chokha + Green Chutney</p>
+                    <div class="price-select">
+                        <select id="price-sattu-paratha">
+                            <option value="99|2 Paratha">2 Paratha - ₹99</option>
+                            <option value="149|3 Paratha">3 Paratha - ₹149</option>
+                            <option value="189|4 Paratha">4 Paratha - ₹189</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Sattu Paratha Combo', 'price-sattu-paratha')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 4. Aalu Paratha Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_AALU_PARATHA_COMBO_URL_HERE" alt="Aalu Paratha Combo">
+                <div class="menu-card-content">
+                    <h3>Aalu Paratha Combo</h3>
+                    <p>Aalu Paratha + Tomato Sauce + Green Chutney</p>
+                    <div class="price-select">
+                        <select id="price-aalu-paratha">
+                            <option value="99|2 Paratha">2 Paratha - ₹99</option>
+                            <option value="149|3 Paratha">3 Paratha - ₹149</option>
+                            <option value="189|4 Paratha">4 Paratha - ₹189</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Aalu Paratha Combo', 'price-aalu-paratha')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 5. Roti Sabji Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_ROTI_SABJI_COMBO_URL_HERE" alt="Roti Sabji Combo">
+                <div class="menu-card-content">
+                    <h3>Roti Sabji Combo</h3>
+                    <p>Gehu ki Roti + Aalu ka Bhujiya Sabji + Salaad + Pickle</p>
+                    <div class="price-select">
+                        <select id="price-roti">
+                            <option value="99|4 Roti">4 Roti - ₹99</option>
+                            <option value="129|5 Roti">5 Roti - ₹129</option>
+                            <option value="149|6 Roti">6 Roti - ₹149</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Roti Sabji Combo', 'price-roti')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 6. Triangle Paratha Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_TRIANGLE_PARATHA_COMBO_URL_HERE" alt="Triangle Paratha Combo">
+                <div class="menu-card-content">
+                    <h3>Triangle Paratha Combo</h3>
+                    <p>Triangle Paratha + Aalu Bhujiya Sabji + Salaad + Pickle</p>
+                    <div class="price-select">
+                        <select id="price-triangle">
+                            <option value="129|4 Pc">4 Pc - ₹129</option>
+                            <option value="179|5 Pc">5 Pc - ₹179</option>
+                            <option value="199|6 Pc">6 Pc - ₹199</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Triangle Paratha Combo', 'price-triangle')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 7. Ghee Litti Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_GHEE_LITTI_COMBO_URL_HERE" alt="Ghee Litti Combo">
+                <div class="menu-card-content">
+                    <h3>Ghee Litti Combo</h3>
+                    <p>Rosted Ghee Garnish Litti + Chokha + Green Chutney</p>
+                    <div class="price-select">
+                        <select id="price-ghee-litti">
+                            <option value="149|3 Pc">3 Pc - ₹149</option>
+                            <option value="199|4 Pc">4 Pc - ₹199</option>
+                            <option value="249|5 Pc">5 Pc - ₹249</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Ghee Litti Combo', 'price-ghee-litti')">Add To Order</button>
+                </div>
+            </div>
+
+            <!-- 8. Premium Ghee Aalu Paratha Combo -->
+            <div class="menu-card">
+                <img src="PASTE_YOUR_PREMIUM_GHEE_AALU_PARATHA_COMBO_URL_HERE" alt="Premium Ghee Aalu Paratha">
+                <div class="menu-card-content">
+                    <h3>Premium Ghee Aalu Paratha</h3>
+                    <p>Ghee Aalu Paratha + Homemade Dahi + Peanut Chutney</p>
+                    <div class="price-select">
+                        <select id="price-premium-aalu">
+                            <option value="299|2 Paratha">2 Paratha - ₹299</option>
+                            <option value="399|3 Paratha">3 Paratha - ₹399</option>
+                        </select>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Premium Ghee Aalu Paratha', 'price-premium-aalu')">Add To Order</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Checkout Section -->
+        <div class="checkout-box">
+            <h2 class="section-title" style="margin-top:0;">Your Selected Items</h2>
+            <div id="cart-list">No items added yet.</div>
+
+            <div class="order-summary">
+                <div><span>Food Value:</span> <span>₹<span id="food-total">0</span></span></div>
+                <div><span>Estimated Distance:</span> <span><span id="dist-display">0</span> km</span></div>
+                <div><span>Delivery Charge:</span> <span>₹<span id="del-charge">0</span></span></div>
+                <hr>
+                <div style="font-weight:bold; font-size:16px;"><span>Grand Total:</span> <span>₹<span id="grand-total">0</span></span></div>
+            </div>
+
+            <h3 class="section-title">Delivery Information</h3>
+            
+            <button class="btn-gps" onclick="getLocation()">Fetch Live Location (GPS)</button>
+            <p id="location-status" style="font-size:12px; color:#555; text-align:center;"></p>
+
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="cust-name" placeholder="Apna naam likhein">
+            </div>
+
+            <div class="form-group">
+                <label>Mobile Number *</label>
+                <input type="tel" id="cust-phone" placeholder="Mobile Number">
+            </div>
+
+            <div class="form-group">
+                <label>Full Address *</label>
+                <textarea id="cust-address" rows="2" placeholder="Ghar ka address"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Landmark *</label>
+                <input type="text" id="cust-landmark" placeholder="Nearby Landmark (e.g. Near Temple)">
+            </div>
+
+            <div class="form-group">
+                <label>Payment Method *</label>
+                <select id="payment-method">
+                    <option value="UPI">UPI (8100418737@ybl)</option>
+                    <option value="COD" id="cod-option">Cash on Delivery (COD)</option>
+                </select>
+                <small id="cod-msg" style="color:red; display:none;">COD is available only on orders ₹500 or below.</small>
+            </div>
+
+            <div class="form-group">
+                <label><input type="checkbox" id="call-confirm"> Request Call Confirmation Before Dispatch</label>
+            </div>
+
+            <button class="btn-whatsapp" onclick="sendOrder()">Place Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        const KITCHEN_LAT = 22.699188;
+        const KITCHEN_LNG = 88.374116;
+
+        let cart = [];
+        let userLat = null;
+        let userLng = null;
+        let distanceKm = 0;
+
+        function addToCart(itemName, selectId) {
+            const val = document.getElementById(selectId).value.split('|');
+            const price = parseInt(val[0]);
+            const variant = val[1];
+
+            cart.push({ name: itemName + ' (' + variant + ')', price: price });
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartList = document.getElementById('cart-list');
+            if(cart.length === 0) {
+                cartList.innerHTML = "No items added yet.";
+                document.getElementById('food-total').innerText = "0";
+                document.getElementById('grand-total').innerText = "0";
+                return;
+            }
+
+            let html = "";
+            let foodTotal = 0;
+
+            cart.forEach((item, index) => {
+                foodTotal += item.price;
+                html += `<div class="cart-item">
+                            <span>${item.name} - ₹${item.price}</span>
+                            <button onclick="removeItem(${index})" style="color:red; border:none; background:none; cursor:pointer;">❌</button>
+                         </div>`;
+            });
+
+            cartList.innerHTML = html;
+            document.getElementById('food-total').innerText = foodTotal;
+
+            // COD Rule Check (> 500 COD Disabled)
+            const codOption = document.getElementById('cod-option');
+            const codMsg = document.getElementById('cod-msg');
+            const paySelect = document.getElementById('payment-method');
+
+            if(foodTotal > 500) {
+                codOption.disabled = true;
+                codMsg.style.display = "block";
+                if(paySelect.value === "COD") paySelect.value = "UPI";
+            } else {
+                codOption.disabled = false;
+                codMsg.style.display = "none";
+            }
+
+            calculateDelivery(foodTotal);
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of Earth in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function getLocation() {
+            const status = document.getElementById('location-status');
+            if (navigator.geolocation) {
+                status.innerText = "Locating...";
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    userLat = pos.coords.latitude;
+                    userLng = pos.coords.longitude;
+                    distanceKm = calculateDistance(KITCHEN_LAT, KITCHEN_LNG, userLat, userLng);
+                    distanceKm = parseFloat(distanceKm.toFixed(2));
+                    
+                    document.getElementById('dist-display').innerText = distanceKm;
+                    status.innerText = "Location fetched successfully!";
+                    updateCartUI();
+                }, () => {
+                    status.innerText = "Unable to fetch location. Delivery charge default set to 0-3km rate.";
+                });
+            } else {
+                status.innerText = "Geolocation is not supported by your browser.";
+            }
+        }
+
+        function calculateDelivery(foodTotal) {
+            let delCharge = 0;
+
+            if (distanceKm > 7) {
+                alert("Sorry, delivery is unavailable beyond 7 km!");
+                document.getElementById('del-charge').innerText = "N/A";
+                document.getElementById('grand-total').innerText = foodTotal;
+                return;
+            }
+
+            if (distanceKm <= 1) {
+                delCharge = (foodTotal >= 500) ? 0 : 30;
+            } else if (distanceKm <= 3) {
+                delCharge = (foodTotal >= 1000) ? 0 : 30;
+            } else if (distanceKm <= 5) {
+                delCharge = (foodTotal >= 1200) ? 0 : 50;
+            } else if (distanceKm > 5 && distanceKm <= 7) {
+                delCharge = Math.round(distanceKm * 15);
+            } else {
+                delCharge = 30; // Default fallback rate
+            }
+
+            document.getElementById('del-charge').innerText = delCharge;
+            document.getElementById('grand-total').innerText = foodTotal + delCharge;
+        }
+
+        function sendOrder() {
+            if(cart.length === 0) {
+                alert("Please add at least one item to order.");
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+            const landmark = document.getElementById('cust-landmark').value;
+            const payMethod = document.getElementById('payment-method').value;
+            const callConfirm = document.getElementById('call-confirm').checked ? "YES" : "NO";
+
+            if(!name || !phone || !address || !landmark) {
+                alert("Please fill all compulsory details (Name, Phone, Address, Landmark).");
+                return;
+            }
+
+            const foodTotal = document.getElementById('food-total').innerText;
+            const delCharge = document.getElementById('del-charge').innerText;
+            const grandTotal = document.getElementById('grand-total').innerText;
+            const orderId = "DEHATI-" + Math.floor(100000 + Math.random() * 900000);
+
+            let itemsList = "";
+            cart.forEach(item => {
+                itemsList += `%0A- ${item.name}: ₹${item.price}`;
+            });
+
+            let locationLink = userLat ? `https://maps.google.com/?q=${userLat},${userLng}` : "Not Shared";
+
+            let msg = `*NEW ORDER - DEHATI*%0A` +
+                      `*Order ID:* ${orderId}%0A` +
+                      `------------------------%0A` +
+                      `*Customer Name:* ${name}%0A` +
+                      `*Mobile:* ${phone}%0A` +
+                      `*Address:* ${address}%0A` +
+                      `*Landmark:* ${landmark}%0A` +
+                      `*Location Link:* ${locationLink}%0A` +
+                      `------------------------%0A` +
+                      `*Items Ordered:* ${itemsList}%0A` +
+                      `------------------------%0A` +
+                      `*Food Total:* ₹${foodTotal}%0A` +
+                      `*Delivery Charge:* ₹${delCharge}%0A` +
+                      `*Grand Total:* ₹${grandTotal}%0A` +
+                      `*Payment Method:* ${payMethod}%0A` +
+                      `*Call Confirmation:* ${callConfirm}%0A%0A` +
+                      `_(Note: You can also send your WhatsApp Live Location directly in this chat)_`;
+
+            window.open(`https://wa.me/918100418737?text=${msg}`, '_blank');
+        }
+    </script>
 </body>
 </html>
